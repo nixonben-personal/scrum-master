@@ -1,12 +1,10 @@
 import { Component, Injector, Input } from '@angular/core';
 import {
-  AbstractControl,
   ControlValueAccessor,
   FormControl,
   NG_VALUE_ACCESSOR,
   NgControl,
   ReactiveFormsModule,
-  ValidationErrors,
 } from '@angular/forms';
 import { InputType } from '../../../core/enum/common.enum';
 import { NumberDirective } from '../../../core/directive/number-only.directive';

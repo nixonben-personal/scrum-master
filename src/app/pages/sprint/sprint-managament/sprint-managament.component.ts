@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { PageTitleComponent } from '../../../shared/page-title/page-title.component';
 import { DashboardCardComponent } from '../../../shared/dashboard-card/dashboard-card.component';
-import { StorageService } from '../../../core/service/storage.service';
 import { RouterModule } from '@angular/router';
 import { ScrumInputComponent } from '../../../shared/custom/scrum-input/scrum-input.component';
+import { StoryService } from '../../../core/service/story.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sprint-managament',
@@ -17,17 +18,19 @@ import { ScrumInputComponent } from '../../../shared/custom/scrum-input/scrum-in
   templateUrl: './sprint-managament.component.html',
 })
 export class SprintManagamentComponent {
+  isClicked: boolean = false;
   dashBoardCardData: any[] = [];
-  storageService = inject(StorageService);
+  storyService = inject(StoryService);
+  tostrService = inject(ToastrService);
+
   constructor() {}
   ngOnInit() {
     this.getAllStoryList();
   }
 
   generateSprintData() {
-    const data = this.storageService.getLocalStorageItem('storyData')
-      ? this.storageService.getLocalStorageItem('storyData')
-      : [];
+   
+    const data = this.storyService.getAllStoryList();
     data?.forEach((element: any) => {
       const dataToSend = {
         title: element?.story_name,
@@ -45,15 +48,21 @@ export class SprintManagamentComponent {
   }
 
   autoSelect() {
-    this.generateSprintData();
+    if (!this.isClicked) {
+      this.dashBoardCardData=[]
+      this.isClicked = true;
+      this.generateSprintData();
+    }
   }
 
   clearStories() {
     this.dashBoardCardData = [];
-    this.storageService.removeLocalStorageValue('storyData');
+    this.storyService.deleteStoryList('storyData');
+    this.tostrService.success('All stories deleted successfully', 'Success');
   }
 
   clearSprint() {
     this.dashBoardCardData = [];
+    this.tostrService.success('Sprint deleted successfully', 'Success');
   }
 }

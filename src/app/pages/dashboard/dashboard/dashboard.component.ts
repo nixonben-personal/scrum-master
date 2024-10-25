@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { PageTitleComponent } from '../../../shared/page-title/page-title.component';
 import { DashboardCardComponent } from '../../../shared/dashboard-card/dashboard-card.component';
 import { Card } from '../../../core/model/common.model';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -13,7 +12,6 @@ import { RouterModule } from '@angular/router';
 })
 export class DashboardComponent {
   dashBoardCardData: Card[]=[]
-  private modalService = inject(NgbModal);
   ngOnInit(){
     this.setCardData()
   }

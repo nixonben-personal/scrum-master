@@ -1,10 +1,8 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   inject,
   Input,
   input,
-  TemplateRef,
 } from '@angular/core';
 import { Card } from '../../core/model/common.model';
 import { CreateStoryComponent } from '../../pages/story/modal/create-story/create-story.component';
