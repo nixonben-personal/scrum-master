@@ -1,0 +1,23 @@
+<div class="full-screen-div">
+  <app-page-title title="Dashboard" position="left"></app-page-title>
+
+  <div class="d-flex justify-content-center align-items-center">
+    @for(data of dashBoardCardData;track $index){
+    <app-dashboard-card
+      [isDashboard]="true"
+      [isButtons]="true"
+      [cardData]="data"
+    ></app-dashboard-card>
+
+    }
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <button
+      routerLink="/sprint-management"
+      type="button"
+      class="btn btn-primary me-2 mt-3"
+    >
+      Set Target Sprints
+    </button>
+  </div>
+</div>
