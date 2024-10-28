@@ -6,6 +6,13 @@
     <input [placeholder]="placeholder" type="text"  [formControl]="inputControl" class="form-control" numbersOnly (blur)="markAsTouched()" (input)="onInput($event)">
 }
 
+@if(type==inputs.PASSWORD){
+    <input [placeholder]="placeholder" type="password"  [formControl]="inputControl" class="form-control"  (blur)="markAsTouched()" (input)="onInput($event)">
+}
+@if(type==inputs.TEXTAREA){
+    <textarea [placeholder]="placeholder" type="password"  [formControl]="inputControl" class="form-control"  (blur)="markAsTouched()" (input)="onInput($event)"></textarea>
+}
+
 <div class="invalid-error"  *ngIf="getErrorMessages()">
     {{getErrorMessages()}}
   </div>

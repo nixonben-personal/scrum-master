@@ -1,0 +1,16 @@
+<div class="login-container">
+  <div class="login-left">
+    <h2>Sign Up! 👋</h2>
+    <form [formGroup]="signupForm">
+      <label for="firstname">First name</label>
+      <app-scrum-input placeholder="First name"  formControlName="first_name" type="text"></app-scrum-input>
+      <label for="firstname">Last name</label>
+      <app-scrum-input placeholder="Last name"  formControlName="last_name" type="text"></app-scrum-input>
+      <label for="email">Email</label>
+      <app-scrum-input placeholder="Email"  formControlName="email" type="text"></app-scrum-input>
+      <label for="password">Password</label>
+      <app-scrum-input placeholder="Last name"  formControlName="password" type="password"></app-scrum-input>
+      <button [disabled]="signupForm.invalid" (click)="signUp()"  type="submit" class="btn btn-signin">Sign Up</button>
+    </form>
+  </div>
+</div>

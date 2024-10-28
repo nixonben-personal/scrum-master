@@ -6,5 +6,7 @@ export enum PositionData{
 
 export enum InputType{
     TEXT='text',
-    NUMBER='number'
+    NUMBER='number',
+    PASSWORD='password',
+    TEXTAREA='textarea'
 }

@@ -71,6 +71,9 @@ export class ScrumInputComponent implements ControlValueAccessor {
         if (errors['required']) {
           return 'This field is required';
         }
+        if (errors['email']) {
+          return 'Please enter a valid email';
+        }
       }
     }
     return '';

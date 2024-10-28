@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, RouterModule } from '@angular/router';
 import { SharedService } from '../../core/service/shared.service';
+import { Routes } from '../../core/constants/route.constants';
 
 @Component({
   selector: 'app-dashboard-card',
@@ -20,6 +21,7 @@ import { SharedService } from '../../core/service/shared.service';
 })
 export class DashboardCardComponent {
   @Input() cardData!: Card;
+  routes=Routes;
   isDashboard=input<boolean>()
   isButtons = input<boolean>();
   private modalService = inject(NgbModal);

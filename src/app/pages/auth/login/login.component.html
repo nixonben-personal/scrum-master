@@ -1,0 +1,20 @@
+<div class="login-container">
+    <div class="login-left">
+      <h2>Login! 👋</h2>
+      <p> Login with Email</p>
+      <form [formGroup]="loginForm">
+        <label for="email">Email</label>
+      <app-scrum-input placeholder="Email"  formControlName="email" type="text"></app-scrum-input>
+      <label for="password">Password</label>
+      <app-scrum-input placeholder="Last name"  formControlName="password" type="password"></app-scrum-input>
+        <button [disabled]="loginForm.invalid" (click)="signIn()" type="submit" class="btn btn-signin">Sign In</button>
+      </form>
+      <p>Don't have an account? <a [routerLink]="['/'+routes.Signup]">Sign Up Now</a></p>
+    </div>
+    <div class="login-right">
+      <div class="login-info">
+        <h3>Why should I login?</h3>
+        <p>By logging in, you can access your personal dashboard, where you can manage your account, view your profile, and much more.</p>
+      </div>
+    </div>
+  </div>

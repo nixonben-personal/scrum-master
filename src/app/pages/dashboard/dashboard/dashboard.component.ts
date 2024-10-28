@@ -3,6 +3,7 @@ import { PageTitleComponent } from '../../../shared/page-title/page-title.compon
 import { DashboardCardComponent } from '../../../shared/dashboard-card/dashboard-card.component';
 import { Card } from '../../../core/model/common.model';
 import { RouterModule } from '@angular/router';
+import { Routes } from '../../../core/constants/route.constants';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
+  routes=Routes
   dashBoardCardData: Card[]=[]
   ngOnInit(){
     this.setCardData()
@@ -19,7 +21,8 @@ export class DashboardComponent {
   setCardData(){
     this.dashBoardCardData.push({
       title:'Total Number of Stories',
-      count:20
+      count:20,
+      description:''
     })
   }
 

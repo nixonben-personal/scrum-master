@@ -1,10 +1,27 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './core/guard/auth.guard';
+import { LoginGuard } from './core/guard/login.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch:'full'
+  },
+  {
+    path:'login',
+    loadComponent: () =>
+      import('./pages/auth/login/login.component').then(
+        (c) => c.LoginComponent
+      ),
+      canActivate:[LoginGuard]
+  },
+  {
+    path:'signup',
+    loadComponent: () =>
+      import('./pages/auth/signup/signup.component').then(
+        (c) => c.SignupComponent
+      ),
   },
   {
     path: 'dashboard',
@@ -12,6 +29,7 @@ export const routes: Routes = [
       import('./pages/dashboard/dashboard/dashboard.component').then(
         (c) => c.DashboardComponent
       ),
+      canActivate:[AuthGuard]
   },
   {
     path:'story-list',
@@ -19,6 +37,7 @@ export const routes: Routes = [
       import('./pages/story/story-list/story-list.component').then(
         (c) => c.StoryListComponent
       ),
+      canActivate:[AuthGuard]
   },
   {
     path:'sprint-management',
@@ -26,5 +45,6 @@ export const routes: Routes = [
       import('./pages/sprint/sprint-managament/sprint-managament.component').then(
         (c) => c.SprintManagamentComponent
       ),
+      canActivate:[AuthGuard]
   }
 ];

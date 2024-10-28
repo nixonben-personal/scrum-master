@@ -26,6 +26,7 @@ import { StoryService } from '../../../../core/service/story.service';
   templateUrl: './create-story.component.html',
 })
 export class CreateStoryComponent {
+  allStoryList: any[] = [];
   storyForm!: FormGroup;
   activeModal = inject(NgbActiveModal);
   tostrService = inject(ToastrService);
@@ -40,6 +41,7 @@ export class CreateStoryComponent {
     this.storyForm = this.fb.group<StoryForm>({
       story_name: new FormControl('', Validators.required),
       story_point: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
     });
   }
 
@@ -48,24 +50,35 @@ export class CreateStoryComponent {
       return;
     }
 
-    let data: any[] = [];
-    data = this.storyService.getAllStoryList();
-    const storyName = this.storyForm.get('story_name')?.value;
-    const isDuplicate = data?.filter(
-      (res) =>
-        res?.story_name.toLowerCase().trim() === storyName.toLowerCase().trim()
-    );
-    if (isDuplicate.length) {
-      this.tostrService.warning('Story with same name exist', 'Warning');
-      return;
-    }
-    data.push({
-      story_name: this.storyForm.get('story_name')?.value.trim(),
-      story_point: this.storyForm.get('story_point')?.value.trim(),
+    this.storyService.getAllStoryList().subscribe({
+      next: (response: any) => {
+        this.allStoryList = response;
+        const storyName = this.storyForm.get('story_name')?.value;
+        const isDuplicate = this.allStoryList?.filter(
+          (res) =>
+            res?.story_name.toLowerCase().trim() ===
+            storyName.toLowerCase().trim()
+        );
+        if (isDuplicate.length) {
+          this.tostrService.warning('Story with same name exist', 'Warning');
+          return;
+        }
+        this.allStoryList.push({
+          story_name: this.storyForm.get('story_name')?.value.trim(),
+          story_point: this.storyForm.get('story_point')?.value.trim(),
+          description: this.storyForm.get('description')?.value.trim(),
+        });
+        this.storyService.postStory(this.allStoryList).subscribe({
+          next: (response: any) => {
+            this.tostrService.success(response, 'Success');
+            this.activeModal.close();
+            this.sharedService.getTotalCount();
+          },
+          error:(error:any)=>{
+            this.tostrService.error(error,'Error')
+          }
+        });
+      },
     });
-    this.storyService.postStory(data);
-    this.tostrService.success('Story Added Successfully', 'Success');
-    this.activeModal.close();
-    this.sharedService.getTotalCount();
   }
 }
