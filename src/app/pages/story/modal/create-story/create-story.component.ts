@@ -71,7 +71,7 @@ export class CreateStoryComponent {
         this.storyService.postStory(this.allStoryList).subscribe({
           next: (response: any) => {
             this.tostrService.success(response, 'Success');
-            this.activeModal.close();
+            this.activeModal.close(true);
             this.sharedService.getTotalCount();
           },
           error:(error:any)=>{
